@@ -23,6 +23,12 @@ md
   });
 ```
 
+In markdown files write link like:
+
+```
+[Video](youtube:YOUR_VIDEO_ID)
+```
+
 ## Options
 
 ### className {String}

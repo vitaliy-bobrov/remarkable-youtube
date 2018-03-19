@@ -1,21 +1,14 @@
-const url = require('url');
-
-const YOUTUBE_HOSTS = new Set([
-  'youtu.be',
-  'youtube.com'
-]);
-
 function generateOpenTag(href, className = '') {
-  return `<iframe class="remarkable-youtube ${className}" src="${href}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>`;
+  const id = href.split(':')[1];
+
+  return `<iframe class="remarkable-youtube ${className}" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>`;
 }
 
 function isYouTubeLink(href) {
-  const host = url.parse(href).hostname;
-
-  return YOUTUBE_HOSTS.has(host);
+  return href.indexOf('youtube:') === 0;
 }
 
-const remarkableYouTube = (md, options) => {
+const remarkableYouTube = (md, config = {}) => {
   const originalLinkOpenRenderer = md.renderer.rules.link_open;
   const originalLinkCloseRenderer = md.renderer.rules.link_close;
 
@@ -24,7 +17,7 @@ const remarkableYouTube = (md, options) => {
 
     if (isYouTubeLink(href)) {
       env.youtube = true;
-      return generateOpenTag(href, options.className);
+      return generateOpenTag(href, config.className);
     }
 
     return originalLinkOpenRenderer(tokens, idx, options, env);
@@ -32,8 +25,8 @@ const remarkableYouTube = (md, options) => {
 
   md.renderer.rules.link_close = (tokens, idx, options, env) => {
     if (env.youtube) {
-        env.youtube = false;
-        return '</iframe>';
+      env.youtube = false;
+      return '</iframe>';
     }
 
     return originalLinkCloseRenderer(tokens, idx, options, env);
