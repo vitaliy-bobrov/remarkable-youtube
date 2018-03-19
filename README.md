@@ -1,4 +1,4 @@
-# remarkable-youtube 🔗
+# remarkable-youtube
 [![npm version](https://badge.fury.io/js/remarkable-youtube.svg)](https://badge.fury.io/js/remarkable-youtube)
 [![npm](https://img.shields.io/npm/dt/remarkable-youtube.svg)](https://github.com/vitaliy-bobrov/remarkable-youtube)
 
