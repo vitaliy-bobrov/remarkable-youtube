@@ -1,7 +1,7 @@
 function generateOpenTag(href, className = '') {
   const id = href.split(':')[1];
 
-  return `<iframe class="remarkable-youtube ${className}" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>`;
+  return `<div class="remarkable-youtube-wrapper"><iframe class="remarkable-youtube ${className}" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></div>`;
 }
 
 function isYouTubeLink(href) {
