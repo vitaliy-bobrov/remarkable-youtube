@@ -1,40 +1,31 @@
-# remarkable-extlink 🔗
-[![npm version](https://badge.fury.io/js/remarkable-extlink.svg)](https://badge.fury.io/js/remarkable-extlink)
-[![npm](https://img.shields.io/npm/dt/remarkable-extlink.svg)](https://github.com/vitaliy-bobrov/remarkable-extlink)
+# remarkable-youtube 🔗
+[![npm version](https://badge.fury.io/js/remarkable-youtube.svg)](https://badge.fury.io/js/remarkable-youtube)
+[![npm](https://img.shields.io/npm/dt/remarkable-youtube.svg)](https://github.com/vitaliy-bobrov/remarkable-youtube)
 
-[Remarkable](https://github.com/jonschlinkert/remarkable) plugin adds `target` and `rel` attributes for external links.
+[Remarkable](https://github.com/jonschlinkert/remarkable) plugin renders YouTube links as iframe.
 
 ## Installation
 - npm:
-  `npm install --save-dev remarkable-extlink`
+  `npm install --save-dev remarkable-youtube`
 
 - yarn:
-  `yarn add -D remarkable-extlink`
+  `yarn add -D remarkable-youtube`
 
 ## Usage
 ```js
 const Remarkable = require('remarkable');
-const extLink = require('remarkable-extlink');
+const youtube = require('remarkable-youtube');
 const md = new Remarkable();
 
 md
-  .use(extlink, {
-    host: 'my-host.com'
+  .use(youtube, {
+    className: 'youtube-iframe'
   });
 ```
 
 ## Options
 
-### host {String}
+### className {String}
 
-**Required**
+Additional class name to add on iframe element.
 
-You site host name to detect external links.
-
-### target {String}
-
-Target link attribute value, default `_blank`.
-
-### rel {String}
-
-Rel link attribute value, default `nofollow noreferrer noopener`.

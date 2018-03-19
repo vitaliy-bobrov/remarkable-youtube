@@ -1,3 +1,2 @@
-# 1.0.2
-## Improvements
-- Code styles fixes, thanks @DmitryGrigorov.
+# 1.0.0
+First release.

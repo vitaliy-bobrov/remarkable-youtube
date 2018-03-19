@@ -1,44 +1,43 @@
 const url = require('url');
 
-const DEFAUL_OPTIONS = {
-  target: '_blank',
-  rel: 'nofollow noreferrer noopener'
-};
+const YOUTUBE_HOSTS = new Set([
+  'youtu.be',
+  'youtube.com'
+]);
 
-/**
- * Defines link is internal.
- * @param host {String} Site hostname.
- * @param href {Object} Parsed url object.
- * @return {Boolean}
- */
-const isInternal = (host, href) => {
-  return href.host === host || (!href.protocol && !href.host && href.pathname);
-};
+function generateOpenTag(href, className = '') {
+  return `<iframe class="remarkable-youtube ${className}" src="${href}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>`;
+}
 
-const remarkableExtLink = (md, options) => {
-  const config = Object.assign({}, DEFAUL_OPTIONS, options);
+function isYouTubeLink(href) {
+  const host = url.parse(href).hostname;
 
-  // Parse and normalize hostname.
-  config.host = url.parse(config.host).host;
-  // Save original method to invoke.
-  const originalRender = md.renderer.rules.link_open;
+  return YOUTUBE_HOSTS.has(host);
+}
 
-  md.renderer.rules.link_open = function() {
-    let result;
+const remarkableYouTube = (md, options) => {
+  const originalLinkOpenRenderer = md.renderer.rules.link_open;
+  const originalLinkCloseRenderer = md.renderer.rules.link_close;
 
-    // Invoke original method first.
-    result = originalRender.apply(null, arguments);
+  md.renderer.rules.link_open = (tokens, idx, options, env) => {
+    const href = tokens[idx].href;
 
-    let regexp = /href="([^"]*)"/;
-
-    let href = url.parse(regexp.exec(result)[1]);
-
-    if (!isInternal(config.host, href)) {
-      result = result.replace('>', ` target="${config.target}" rel="${config.rel}">`);
+    if (isYouTubeLink(href)) {
+      env.youtube = true;
+      return generateOpenTag(href, options.className);
     }
 
-    return result;
+    return originalLinkOpenRenderer(tokens, idx, options, env);
+  };
+
+  md.renderer.rules.link_close = (tokens, idx, options, env) => {
+    if (env.youtube) {
+        env.youtube = false;
+        return '</iframe>';
+    }
+
+    return originalLinkCloseRenderer(tokens, idx, options, env);
   };
 };
 
-module.exports = remarkableExtLink;
+module.exports = remarkableYouTube;
