@@ -1,8 +1,8 @@
 function generateOpenTag(href, className = '', origin, related) {
   const id = href.split(':')[1];
-  const originParam = origin ? `&origin=${origin}` : '';
+  const originParam = origin ? `origin=${origin}` : '';
   const relParam = typeof related === 'boolean' ?
-    `&rel=${related ? 1 : 0}` :
+    `rel=${related ? 1 : 0}` :
     '';
   const params = originParam || relParam ?
     `?${[originParam, relParam].filter(p => !!p).join('&')}` :
