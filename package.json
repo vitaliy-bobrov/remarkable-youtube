@@ -1,6 +1,6 @@
 {
   "name": "remarkable-youtube",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Renders YouTube video links with iframe.",
   "main": "index.js",
   "scripts": {
