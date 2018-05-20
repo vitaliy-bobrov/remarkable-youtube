@@ -1,7 +1,20 @@
-function generateOpenTag(href, className = '') {
+function generateOpenTag(href, className = '', origin, related) {
   const id = href.split(':')[1];
+  const originParam = origin ? '&origin=${origin}' : '';
+  const relParam = typeof related !== 'undefined' ?
+    `&rel=${related ? 1 : 0}` :
+    '';
+  const params = originParam || relParam ?
+    `?${[originParam, relParam].filter(p => !!p).join('&')}` :
+    '';
 
-  return `<div class="remarkable-youtube-wrapper"><iframe class="remarkable-youtube ${className}" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></div>`;
+  return `<div class="remarkable-youtube-wrapper">
+    <iframe class="remarkable-youtube ${className}"
+            src="https://www.youtube.com/embed/${id}${params}"
+            frameborder="0"
+            allow="encrypted-media"
+            allowfullscreen></iframe>
+  </div>`;
 }
 
 function isYouTubeLink(href) {
@@ -17,7 +30,7 @@ const remarkableYouTube = (md, config = {}) => {
 
     if (isYouTubeLink(href)) {
       env.youtube = true;
-      return generateOpenTag(href, config.className);
+      return generateOpenTag(href, config.className, config.origin, config.related);
     }
 
     return originalLinkOpenRenderer(tokens, idx, options, env);

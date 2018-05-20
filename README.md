@@ -35,3 +35,11 @@ In markdown files write link like:
 
 Additional class name to add on iframe element.
 
+### origin {String}
+
+Specify web-site origin parameter.
+
+### related {Boolean}
+
+Specify if YouTube player should show related videos at the end of a playback.
+
