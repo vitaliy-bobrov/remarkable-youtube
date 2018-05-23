@@ -30,7 +30,7 @@ const remarkableYouTube = (md, config = {}) => {
 
     if (isYouTubeLink(href)) {
       env.youtube = true;
-      return generateOpenTag(href, config.className, config.origin, config.related, options.attr);
+      return generateOpenTag(href, config.className, config.origin, config.related, config.attr);
     }
 
     return originalLinkOpenRenderer(tokens, idx, options, env);
