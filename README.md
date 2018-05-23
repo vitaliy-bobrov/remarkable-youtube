@@ -43,3 +43,7 @@ Specify web-site origin parameter.
 
 Specify if YouTube player should show related videos at the end of a playback.
 
+### attr {String}
+
+Specify the attribute name to use for source. Default value `src`. Could be used to make videos lazy loaded, for example.
+

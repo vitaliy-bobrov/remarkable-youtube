@@ -1,4 +1,4 @@
-function generateOpenTag(href, className = '', origin, related) {
+function generateOpenTag(href, className = '', origin, related, attr = 'src') {
   const id = href.split(':')[1];
   const originParam = origin ? `origin=${origin}` : '';
   const relParam = typeof related === 'boolean' ?
@@ -10,7 +10,7 @@ function generateOpenTag(href, className = '', origin, related) {
 
   return `<div class="remarkable-youtube-wrapper">
     <iframe class="remarkable-youtube ${className}"
-            src="https://www.youtube.com/embed/${id}${params}"
+            ${attr}="https://www.youtube.com/embed/${id}${params}"
             frameborder="0"
             allow="encrypted-media"
             allowfullscreen></iframe>
@@ -30,7 +30,7 @@ const remarkableYouTube = (md, config = {}) => {
 
     if (isYouTubeLink(href)) {
       env.youtube = true;
-      return generateOpenTag(href, config.className, config.origin, config.related);
+      return generateOpenTag(href, config.className, config.origin, config.related, options.attr);
     }
 
     return originalLinkOpenRenderer(tokens, idx, options, env);
