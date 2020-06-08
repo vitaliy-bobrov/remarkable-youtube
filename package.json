@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/vitaliy-bobrov/remarkable-youtube#readme",
   "dependencies": {
-    "remarkable": "^1.7.1"
+    "remarkable": "^2.0.1"
   }
 }
