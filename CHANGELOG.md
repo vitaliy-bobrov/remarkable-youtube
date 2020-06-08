@@ -7,5 +7,5 @@ First release.
 # 1.2.0
 - Added source attribute parameter.
 
-# 1.2.1
+# 1.2.2
 - Update dependencies.
